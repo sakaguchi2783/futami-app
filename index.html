@@ -16,8 +16,14 @@
 </head>
 
 <body>
-  <header>
+  <!-- ====== メインヘッダー（サイトタイトル＋サブタイトル） ====== -->
+  <header class="main-header">
     <h1>FUTAMIRINKAI Artificial Island</h1>
+    <p class="subtitle">人を「it」ではなく、「You」として向き合える島へ</p>
+  </header>
+
+  <!-- ====== サブヘッダー（グローバルナビゲーション） ====== -->
+  <header class="sub-header">
     <nav>
       <a href="#/map">人工島地図</a>
       <a href="#/communities">コミュニティ</a>
@@ -27,8 +33,10 @@
     </nav>
   </header>
 
-  <main id="view"><!-- SPA ビューを書き換えます --></main>
+  <!-- SPA 描画領域 -->
+  <main id="view"><!-- ここに各ページがレンダリングされます --></main>
 
+  <!-- フッター -->
   <footer>&copy; 2025 FUTAMIRINKAI</footer>
 </body>
 </html>

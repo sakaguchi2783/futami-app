@@ -1,113 +1,200 @@
 /* ========== カラーパレット & 基本 ========== */
-:root{
-  --bg:#0d0d0d;
-  --fg:#ffffff;
-  --accent:#002d5b;      /* マーカーの青 */
-  --card:#151515;
-  --border:rgba(255,255,255,.1);
-  --radius:8px;
-  --shadow:0 2px 6px rgba(0,0,0,.5);
-  font-size:16px;
-  font-family:'Helvetica Neue',Arial,sans-serif;
+:root {
+  --bg: #0d0d0d;
+  --fg: #ffffff;
+  --accent: #002d5b;
+  --card: #151515;
+  --border: rgba(255,255,255,0.1);
+  --radius: 8px;
+  --shadow: 0 2px 6px rgba(0,0,0,0.5);
+
+  /* ★ マーカーの基本サイズを変数化 */
+  --marker-size: 48px;
+  --marker-font: 1rem;
+
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--fg);line-height:1.6;}
-
-header{
-  padding:1rem 2rem;
-  background:#04434e;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-}
-header h1{font-size:1.25rem;letter-spacing:.05em;}
-nav a{
-  color:var(--fg);
-  margin-left:1rem;
-  text-decoration:none;
-  position:relative;
-}
-nav a::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;left:0;height:2px;width:0;
-  background:var(--accent);
-  transition:width .3s;
-}
-nav a:hover::after{width:100%;}
-footer{
-  padding:1rem;
-  text-align:center;
-  font-size:.8rem;
-  opacity:.6;
-}
-#view{padding:2rem;min-height:60vh;}
-
-/* ---------- カード ---------- */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:1.5rem;
-  margin-bottom:1.5rem;
-  box-shadow:var(--shadow);
+/* リセット */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ---------- ボタン ---------- */
-button,.btn{
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  padding:.6rem 1.2rem;
-  border-radius:var(--radius);
-  cursor:pointer;
-  font-weight:bold;
-}
-button:disabled{opacity:.5;cursor:not-allowed;}
-
-/* ---------- フォーム ---------- */
-input,textarea{
-  width:100%;
-  padding:.6rem;
-  margin-top:.3rem;
-  margin-bottom:1rem;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:#1a1a1a;
-  color:var(--fg);
+body {
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
 }
 
-/* ---------- グリッド ---------- */
-.grid{display:grid;gap:1.5rem;}
-@media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr);}}
+/* ---------- ビューポートの指定 ---------- */
+@-ms-viewport { width: device-width; }
+@viewport { width: device-width; }
+
+/* ========== メインヘッダー ========== */
+.main-header {
+  background: hsl(178, 95%, 16%);
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.main-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.main-header .subtitle {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ========== サブヘッダー ========== */
+.sub-header {
+    font-size: 1.0rem;
+  background: #212121;
+  padding: 1rem 1rem;
+}
+.sub-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.sub-header nav a {
+  color: var(--fg);
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+}
+.sub-header nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+.sub-header nav a:hover::after {
+  width: 100%;
+}
+
+/* ========== フッター ========== */
+footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ========== SPA ビュー領域 ========== */
+#view {
+  padding: 2rem;
+  min-height: 60vh;
+}
+
+/* ========== カード & フォーム ========== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+button,
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: bold;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.3rem 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #1a1a1a;
+  color: var(--fg);
+}
+
+/* ========== グリッド ========== */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 /* ========== ★ 人工島マップ ========== */
-.map-container{
-  position:relative;
-  max-width:100%;
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 1500px; /* 任意：最大表示幅 */
+  margin: 0 auto;
 }
-.map-container img{
-  width:100%;
-  height:auto;
-  display:block;
+.map-container img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
-.marker{
-  position:absolute;
-  transform:translate(-50%,-50%);
-  width:48px;height:48px;
-  border-radius:50%;
-  background:var(--accent);
-  border:4px solid #fff;
-  color:#fff;
-  font-weight:bold;
-  font-size:1rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  transition:transform .2s;
+
+/* マーカー共通 */
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0; /* style属性で上書き */
+  transform: translate(-50%, -50%);
+  width: var(--marker-size);
+  height: var(--marker-size);
+  border-radius: 50%;
+  background: var(--accent);
+  border: 4px solid #fff;
+  color: #fff;
+  font-weight: bold;
+  font-size: var(--marker-font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
-.marker:hover{transform:translate(-50%,-50%) scale(1.1);}
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ========== ★ レスポンシブ調整 ========== */
+/* 小さな画面ではマーカーを縮小 */
+@media (max-width: 600px) {
+  :root {
+    --marker-size: 32px;
+    --marker-font: 0.8rem;
+  }
+}
+/* さらに小さい画面ではもう少し縮める */
+@media (max-width: 400px) {
+  :root {
+    --marker-size: 24px;
+    --marker-font: 0.7rem;
+  }
+}

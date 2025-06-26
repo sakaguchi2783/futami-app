@@ -32,6 +32,10 @@ async function renderMap(root){
      left / top は画像左上基準の割合（0〜100）
      必要に応じて微調整してください */
   const markers = [
+    {block:'1',  top:45, left:19},
+    {block:'2',  top:72, left:11},
+    {block:'3',  top:65, left:18},
+    {block:'4',  top:65, left:24},
     {block:'5',  top:25, left:32},
     {block:'6',  top:25, left:43},
     {block:'7',  top:38, left:38},
