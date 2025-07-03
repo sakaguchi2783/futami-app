@@ -1,200 +1,166 @@
-/* ========== カラーパレット & 基本 ========== */
-:root {
-  --bg: #0d0d0d;
-  --fg: #ffffff;
-  --accent: #002d5b;
-  --card: #151515;
-  --border: rgba(255,255,255,0.1);
-  --radius: 8px;
-  --shadow: 0 2px 6px rgba(0,0,0,0.5);
+/* ==============================================================
+   カラーパレット & 基本設定
+=================================================================*/
+:root{
+  --bg:#0d0d0d;
+  --fg:#ffffff;
+  --accent:#002d5b;
+  --card:#151515;
+  --border:rgba(255,255,255,0.1);
+  --radius:8px;
+  --shadow:0 2px 6px rgba(0,0,0,.5);
 
-  /* ★ マーカーの基本サイズを変数化 */
-  --marker-size: 48px;
-  --marker-font: 1rem;
+  /* マップ用マーカーのサイズ変数 */
+  --marker-size:48px;
+  --marker-font:1rem;
 
-  font-size: 16px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* リセット */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  font-size:16px;
+  font-family:'Helvetica Neue',Arial,sans-serif;
 }
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  line-height: 1.6;
+/* --------------------------------------------------------------
+   リセット
+----------------------------------------------------------------*/
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);line-height:1.6}
+
+/* Edge/IE ビューポート */
+@-ms-viewport{width:device-width}
+@viewport{width:device-width}
+
+/* --------------------------------------------------------------
+   ヘッダー / ナビ
+----------------------------------------------------------------*/
+.main-header{background:hsl(178,95%,16%);color:#fff;padding:2rem 1rem;text-align:center}
+.main-header h1{font-size:1.5rem;margin-bottom:.5rem;letter-spacing:.05em}
+.main-header .subtitle{font-size:1rem;opacity:.8}
+
+.sub-header{background:#212121;padding:1rem 1rem;font-size:1rem}
+.sub-header nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}
+.sub-header nav a{color:var(--fg);font-weight:bold;text-decoration:none;position:relative}
+.sub-header nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:4px;
+  background:var(--accent);transition:width .3s}
+.sub-header nav a:hover::after{width:100%}
+
+/* --------------------------------------------------------------
+   フッター / SPA ビュー
+----------------------------------------------------------------*/
+footer{padding:1rem;text-align:center;font-size:.8rem;opacity:.6}
+#view{padding:2rem;min-height:60vh}
+
+/* --------------------------------------------------------------
+   汎用カード / フォーム要素
+----------------------------------------------------------------*/
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+button,.btn{background:var(--accent);color:#fff;border:none;padding:.6rem 1.2rem;
+  border-radius:var(--radius);cursor:pointer;font-weight:bold}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,textarea{width:100%;padding:.6rem;margin:.3rem 0 1rem;border:1px solid var(--border);
+  border-radius:var(--radius);background:#1a1a1a;color:var(--fg)}
+
+/* --------------------------------------------------------------
+   グリッドユーティリティ
+----------------------------------------------------------------*/
+.grid{display:grid;gap:1.5rem}
+@media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ==============================================================
+   ★ 人工島マップ
+=================================================================*/
+.map-container{position:relative;width:100%;max-width:1500px;margin:0 auto}
+.map-container img{width:100%;height:auto;display:block}
+
+.marker{
+  position:absolute;top:0;left:0;transform:translate(-50%,-50%);
+  width:var(--marker-size);height:var(--marker-size);border-radius:50%;
+  background:var(--accent);border:4px solid #fff;color:#fff;font-weight:bold;
+  font-size:var(--marker-font);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform .2s;
+}
+.marker:hover{transform:translate(-50%,-50%) scale(1.1)}
+
+/* マーカー縮小 */
+@media(max-width:600px){
+  :root{--marker-size:32px;--marker-font:.8rem}
+}
+@media(max-width:400px){
+  :root{--marker-size:24px;--marker-font:.7rem}
 }
 
-/* ---------- ビューポートの指定 ---------- */
-@-ms-viewport { width: device-width; }
-@viewport { width: device-width; }
-
-/* ========== メインヘッダー ========== */
-.main-header {
-  background: hsl(178, 95%, 16%);
-  color: #fff;
-  padding: 2rem 1rem;
-  text-align: center;
+/* ==============================================================
+   ★ アンケート（Poll）UI
+=================================================================*/
+.poll-step{max-width:560px;margin:0 auto}
+.poll-question{font-weight:bold;font-size:1.1rem;margin-bottom:1rem}
+.poll-options{display:flex;flex-direction:column;gap:.75rem}
+.poll-option{
+  position:relative;background:#1a1a1a;border:1px solid var(--border);
+  border-radius:var(--radius);padding:.6rem 1rem;cursor:pointer;
+  transition:background .2s;
 }
-.main-header h1 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
+.poll-option:hover{background:#2a2a2a}
+.poll-option.selected{background:var(--accent);color:#f8f4f4}
+.poll-bar{
+  position:absolute;top:0;left:0;height:100%;background:var(--accent);
+  border-radius:var(--radius) 0 0 var(--radius);opacity:.25;z-index:-1;
 }
-.main-header .subtitle {
-  font-size: 1rem;
-  opacity: 0.8;
-}
-
-/* ========== サブヘッダー ========== */
-.sub-header {
-    font-size: 1.0rem;
-  background: #212121;
-  padding: 1rem 1rem;
-}
-.sub-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-.sub-header nav a {
-  color: var(--fg);
-  font-weight: bold;
-  text-decoration: none;
-  position: relative;
-}
-.sub-header nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 4px;
-  background: var(--accent);
-  transition: width 0.3s;
-}
-.sub-header nav a:hover::after {
-  width: 100%;
+.poll-perc{
+  position:absolute;right:.8rem;top:50%;transform:translateY(-50%);
+  font-weight:bold;
 }
 
-/* ========== フッター ========== */
-footer {
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.8rem;
-  opacity: 0.6;
+/* ==============================================================
+   ★ タグクラウド（コミュニティ再利用可）
+=================================================================*/
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2rem}
+.tag-cloud .tag{
+  background:#1a1a1a;padding:.4rem .8rem;border-radius:var(--radius);cursor:pointer;
+  transition:transform .2s,font-size .2s;
 }
+.tag-cloud .tag:hover{transform:scale(1.1)}
+.tag-cloud .tag.active{background:var(--accent);color:#000}
+.tag-cloud .tag.popular{animation:bounce 1s infinite alternate}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-5px)}}
 
-/* ========== SPA ビュー領域 ========== */
-#view {
-  padding: 2rem;
-  min-height: 60vh;
-}
+/* ==============================================================
+   ★ コミュニティカード（アンケートでは未使用だが保持）
+=================================================================*/
+.community-list{display:grid;gap:1.5rem}
+@media(min-width:600px){.community-list{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.community-list{grid-template-columns:repeat(3,1fr)}}
 
-/* ========== カード & フォーム ========== */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
+.community-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1rem;text-align:center;position:relative;transition:transform .2s;
 }
-button,
-.btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: bold;
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-input,
-textarea {
-  width: 100%;
-  padding: 0.6rem;
-  margin: 0.3rem 0 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: #1a1a1a;
-  color: var(--fg);
-}
+.community-card:hover{transform:scale(1.03)}
+.community-card img.icon{width:48px;height:48px;margin-bottom:.5rem}
+.community-card .badges{position:absolute;top:.5rem;right:.5rem}
+.badge{display:inline-block;padding:.2rem .4rem;border-radius:4px;font-size:.75rem;color:#000;margin-left:.3rem}
+.badge-star-1{background:#bbb}
+.badge-star-2{background:#ffc107}
+.badge-star-3{background:#28a745}
 
-/* ========== グリッド ========== */
-.grid {
-  display: grid;
-  gap: 1.5rem;
+/* ==============================================================
+   ★ イベント：横スクロールカルーセル
+=================================================================*/
+.carousel-container{position:relative;overflow:hidden;margin:2rem 0}
+.carousel-track{display:flex;transition:transform .5s ease}
+.carousel-item{
+  min-width:80%;margin-right:1rem;background:var(--card);border-radius:var(--radius);
+  overflow:hidden;flex-shrink:0;position:relative;
 }
-@media (min-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.carousel-item img{width:100%;height:auto;display:block}
+.carousel-item .info{padding:1rem}
+.carousel-item .new-label{
+  position:absolute;top:.5rem;left:.5rem;background:#e74c3c;color:#fff;
+  padding:.2rem .5rem;border-radius:var(--radius);font-size:.75rem;
+  animation:bounce .5s infinite alternate;
 }
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* ========== ★ 人工島マップ ========== */
-.map-container {
-  position: relative;
-  width: 100%;
-  max-width: 1500px; /* 任意：最大表示幅 */
-  margin: 0 auto;
-}
-.map-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* マーカー共通 */
-.marker {
-  position: absolute;
-  top: 0;
-  left: 0; /* style属性で上書き */
-  transform: translate(-50%, -50%);
-  width: var(--marker-size);
-  height: var(--marker-size);
-  border-radius: 50%;
-  background: var(--accent);
-  border: 4px solid #fff;
-  color: #fff;
-  font-weight: bold;
-  font-size: var(--marker-font);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.marker:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* ========== ★ レスポンシブ調整 ========== */
-/* 小さな画面ではマーカーを縮小 */
-@media (max-width: 600px) {
-  :root {
-    --marker-size: 32px;
-    --marker-font: 0.8rem;
-  }
-}
-/* さらに小さい画面ではもう少し縮める */
-@media (max-width: 400px) {
-  :root {
-    --marker-size: 24px;
-    --marker-font: 0.7rem;
-  }
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;
+  display:flex;justify-content:space-between}
+.carousel-nav button{
+  background:rgba(0,0,0,.5);border:none;color:#fff;font-size:2rem;padding:0 .5rem;cursor:pointer
 }

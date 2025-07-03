@@ -5,38 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FUTAMIRINKAI Artificial Island</title>
 
-  <!-- スタイル -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Supabase JS CDN -->
+  <!-- Supabase JS -->
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- アプリ本体 -->
   <script defer src="app.js"></script>
 </head>
-
 <body>
-  <!-- ====== メインヘッダー（サイトタイトル＋サブタイトル） ====== -->
+  <!-- メインヘッダー -->
   <header class="main-header">
     <h1>FUTAMIRINKAI Artificial Island</h1>
-    <p class="subtitle">人を「it」ではなく、「You」として向き合える島へ</p>
+    <p class="subtitle">ー人を「it」ではなく、「You」として向き合える島へー</p>
   </header>
 
-  <!-- ====== サブヘッダー（グローバルナビゲーション） ====== -->
+  <!-- サブヘッダー -->
   <header class="sub-header">
     <nav>
       <a href="#/map">人工島地図</a>
-      <a href="#/communities">コミュニティ</a>
+      <a href="#/survey">アンケート</a>
       <a href="#/events">イベント</a>
       <a href="#/blog">ブログ</a>
-      <a href="#/people">人材探し</a>
+      <a href="#/people">人探し</a>
     </nav>
   </header>
 
   <!-- SPA 描画領域 -->
-  <main id="view"><!-- ここに各ページがレンダリングされます --></main>
+  <main id="view"></main>
 
-  <!-- フッター -->
   <footer>&copy; 2025 FUTAMIRINKAI</footer>
 </body>
 </html>
