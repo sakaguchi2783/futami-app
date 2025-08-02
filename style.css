@@ -75,7 +75,7 @@ input,textarea{width:100%;padding:.6rem;margin:.3rem 0 1rem;border:1px solid var
 .marker{
   position:absolute;top:0;left:0;transform:translate(-50%,-50%);
   width:var(--marker-size);height:var(--marker-size);border-radius:50%;
-  background:var(--accent);border:4px solid #fff;color:#fff;font-weight:bold;
+  background:var(--accent);border:2px solid #fff;color:#fff;font-weight:bold;
   font-size:var(--marker-font);display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:transform .2s;
 }
