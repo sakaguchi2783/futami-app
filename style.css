@@ -31,7 +31,7 @@ body{background:var(--bg);color:var(--fg);line-height:1.6}
 /* --------------------------------------------------------------
    ヘッダー / ナビ
 ----------------------------------------------------------------*/
-.main-header{background:hsl(178,95%,16%);color:#fff;padding:2rem 1rem;text-align:center}
+.main-header{background:hsla(178, 57%, 36%, 0.977);color:#fff;padding:2rem 1rem;text-align:center}
 .main-header h1{font-size:1.5rem;margin-bottom:.5rem;letter-spacing:.05em}
 .main-header .subtitle{font-size:1rem;opacity:.8}
 
